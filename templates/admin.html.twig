@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index, follow">
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app_admin') }}
+        {% endblock %}
+    </head>
+    <body class="{% if app.user %}authentified{% endif %}">
+        <header>
+            <h1><span class="bg-white">Interface d'administration</span></h1>
+        </header>
+         {% if app.user %}
+        <nav class="navigation">
+            <ul>
+                <li><a href="{{ path('admin') }}">Accueil</a></li>
+                <li><a href="{{ path('pages_site') }}">Pages du site</a></li>
+                <li><a href="{{ path('articles_site') }}">Articles</a></li>
+                <li><a href="{{ path('header_manage') }}">En-tête du site</a></li>
+                <li><a href="{{ path('footer_manage') }}">Pied de page du site</a></li>
+                <li><a href="{{ path('users_list') }}">Utilisateurs</a></li>
+                <li><a href="{{ path('home') }}" target="_blank" rel="noopener">Voir le site</a></li>
+                <li><a href="/logout">Se déconnecter</a></li>
+            </ul>
+        </nav>
+         {% endif %}
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+        <footer>
+            <p>Conception et développement : Creative Eye Studio</p>
+        </footer>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app_admin') }}
+        {% endblock %}
+    </body>
+</html>

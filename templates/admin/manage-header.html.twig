@@ -1,0 +1,14 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Modifier l'en-tête du site{% endblock %}
+
+{% block body %}
+
+<section class="bloc1">
+    <h2>Modifier l'en-tête du site</h2>
+    {{ form_start(form) }}
+            {{ form_row(form.block_content, { value: dataFile }) }}
+    {{ form_end(form) }}
+</section>
+
+{% endblock %}

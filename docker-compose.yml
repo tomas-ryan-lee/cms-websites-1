@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+
+    php:
+        container_name: "php-fpm"
+        build:
+            context: ./
+        environment:
+            - APP_ENV=${APP_ENV}
+            - APP_SECRET=${APP_SECRET}
+            - DATABASE_URL=${DATABASE_URL}
+        volumes:
+            - ${APP_FOLDER}:/var/www
+
+    nginx:
+        container_name: "nginx"
+        build:
+            context: .infra/nginx
+        volumes:
+            - ${APP_FOLDER}:/var/www
+            - .infra/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - .infra/logs:/var/log
+        depends_on:
+            - php
+        ports:
+            - "80:80"
+    
+    database:
+        image: mysql:5.7
+        container_name: database
+        environment:
+            MYSQL_ROOT_PASSWORD: docker
+            MYSQL_DATABASE: cms_db
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony
+        ports:
+            - "6033:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        links:
+            - database
+        environment:
+            PMA_HOST: database
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8081:80
+
+volumes:
+    dbdata:

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}
+                Actualités
+            {% endblock %}
+        </title>
+        <meta name="description" content="{{ meta_description }}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index, follow">
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookie-bar@1.8.3/themes/cookiebar.min.css" />
+    </head>
+    <body>
+        {% include "front/blocks/header.html.twig" %}
+        {% block body %}
+            {% for article in articles %}
+                <p>
+                    {{ article.name }}<br>
+                    <a href={{ path('post_view', { post: article.slug }) }}>Voir l'article</a>
+                </p>
+            {% else %}
+                <p>Il n'y a pas encore d'articles publiés !</p>
+            {% endfor %}
+        {% endblock %}
+        <!-- Footer -->
+        {% include "front/blocks/footer.html.twig" %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?forceLang=fr&theme=altblack&tracking=1&thirdparty=1&always=1&hideDetailsBtn=1&showPolicyLink=1&privacyPage=%2Fpolitique-confidentialite"></script>
+    </body>
+</html>

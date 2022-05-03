@@ -1,0 +1,43 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Pages du site{% endblock %}
+
+{% block body %}
+
+<section class="bloc1">
+    <p class="btn-add">
+        <a class="btn-link" href="{{ path('add_page') }}">Ajouter une page</a>
+    </p>
+    <h2>Liste des pages</h2>
+    {% for page in pages %}
+    <div class="line">
+        <p>
+            {{ page.name }}<br />
+            <em>URL : {{ page.slug }}</em>
+        </p>
+        <ul>
+            {% if page.slug == "index" %}
+                <li>
+                    <a href=" {{ app.request.schemeAndHttpHost }}/" target="_blank" rel="noopener">Voir</a>
+                </li>
+                {% elseif page.slug != "index" %}
+                <li>
+                    <a href="  {{ path('page_view', { slug: page.slug } )}} " target="_blank" rel="noopener">Voir</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href=" {{ path('modify_page', { slug: page.filename } )}} ">Modifier</a>
+                </li>
+                {% if (page.blockedpage == 0) %}
+                <li>
+                    <a href=" {{ path('delete_page', { id: page.id } )}} ">Supprimer</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% else %}
+        <p>Il n'y a pas encore de pages publiées !</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

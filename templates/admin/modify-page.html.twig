@@ -1,0 +1,36 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Modifier une page{% endblock %}
+
+{% block body %}
+
+<section class="bloc1">
+    <h2>Modifier une page</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#content-page">Contenu</a></li>
+        <li><a href="#content-seo">SEO</a></li>
+    </ul>
+    {{ form_start(form) }}
+        <div id="content-page" class="tab-pane active">
+            {{ form_row(form.page_title, { value: pageName } ) }}
+            {{ form_row(form.page_url, { value: pageSlug }) }}
+            {{ form_row(form.page_content, { value: dataFile }) }}
+        </div>
+        <div id="content-seo" class="tab-pane">
+            {{ form_row(form.page_meta_title, { value: pageMetaTitle }) }}
+            {{ form_row(form.page_meta_desc, { value: pageMetaDesc }) }}
+        </div>
+        {{ form_row(form.page_submit) }}
+    {{ form_end(form) }}
+    <p><a href=" {{ app.request.schemeAndHttpHost }}/fr/{{ pageSlug }} " target="_blank" rel="noopener">Voir la page</a></p>
+</section>
+
+{% if (pageSlug == "index") or (pageSlug == "mentions-legales") or (pageSlug == "politique-de-confidentialite") %}
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script>
+        $("#add_pages_page_url").attr("type", "hidden");
+        $("label[for=add_pages_page_url]").addClass("hidden");
+    </script>
+{% endif %}
+
+{% endblock %}

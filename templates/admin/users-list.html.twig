@@ -1,0 +1,26 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+
+<section class="bloc1">
+    <p class="btn-add">
+        <a class="btn-link" href="{{ path('app_register') }}">Ajouter un utilisateur</a>
+    </p>
+    <h2>Utilisateurs</h2>
+    {% for user in users %}
+    <div class="line">
+        <p>{{ user.name }} {{ user.firstname }}</p>
+        <ul>
+            <li>
+                <a>Supprimer</a>
+            </li>
+        </ul>
+    </div>
+    {% else %}
+        <p>Il n'y a pas encore de pages publiées !</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

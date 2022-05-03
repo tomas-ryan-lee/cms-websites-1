@@ -1,0 +1,36 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Interface d'administration{% endblock %}
+
+{% block body %}
+
+<!-- Pages et articles -->
+<div class="content-blocs">
+    <section class="bloc2">
+        <h2>Dernières pages</h2>
+        {% for page in pages %}
+            <p>{{ page.name }}</p>
+        {% else %}
+            <p>Il n'y a pas encore de pages publiées !</p>
+        {% endfor %}
+
+    </section>
+    <section class="bloc2">
+        <h2>Dernièrs articles</h2>
+        {% for article in articles %}
+            <p>{{ article.name }}</p>
+        {% else %}
+            <p>Il n'y a pas encore d'articles publiés !</p>
+        {% endfor %}
+    </section>
+</div>
+
+<!-- Utilisateurs -->
+<section class="bloc2">
+    <h2>Utilisateurs</h2>
+        {% for user in users %}
+            <p>{{ user.name }} {{ user.firstname }}</p>
+        {% endfor %}
+</section>
+
+{% endblock %}

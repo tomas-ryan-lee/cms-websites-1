@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}
+                Test
+            {% endblock %}
+        </title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <!-- En-tête du site -->
+
+        <!-- Contenu du site -->
+        <main>
+        {% block body %}
+            {% if app.request.attributes.get('_route') == 'home' %}
+                {% include "front/website/index.html.twig" %}
+            {% elseif app.request.attributes.get('_route') != 'home' %}
+                {% include "front/website/#{slugs.filename}.html.twig" %}
+            {% endif %}
+        {% endblock %}
+        </main>
+
+        <!-- Pied de page du site -->
+        
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

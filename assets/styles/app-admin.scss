@@ -1,0 +1,333 @@
+/******************************************************/
+/********************* VARIABLES **********************/
+/******************************************************/
+$nav-width: 20rem;
+
+
+
+
+/******************************************************/
+/********$********* EN-TÊTE DE SITE *******************/
+/******************************************************/
+header{
+    margin-bottom: 3rem;
+}
+
+h1{
+    font: 300 2rem/100% "Source Sans Pro";
+    position: relative;
+    .bg-white{
+        background-color: white;
+        position: relative;
+        padding-right: 2rem;
+    }
+    &::before{
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 100%;
+        height: .0625rem;
+        background-color: gray;
+    }
+}
+
+
+
+
+/******************************************************/
+/******************* CORPS DE SITE ********************/
+/******************************************************/
+body{
+    background-color: #fff;
+    margin: 0;
+    position: relative;
+    padding: 2rem 3rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+    &.authentified{
+        margin-left: $nav-width;
+    }
+}
+
+
+
+
+/******************************************************/
+/******************** NAVIGATION **********************/
+/******************************************************/
+.navigation{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: $nav-width;
+    height: 100vh;
+    background-color: #3F7690;
+    ul{
+        padding-left: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    a{
+        font: 400 1rem/100% "Lato";
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        display: block;
+        padding: 1.1rem 1rem;
+        border-bottom: .0625rem solid rgb(218, 218, 218);
+        &:hover{
+            background-color: rgba($color: #000000, $alpha: .1)
+        }
+    }
+}
+
+
+
+
+/******************************************************/
+/******************* PIED DE PAGE *********************/
+/******************************************************/
+footer {
+    position: absolute;
+    bottom: .5rem;
+    right: 1.5rem;
+    p{
+        font: 400 .9rem/100% "Lato";
+    }
+}
+
+
+
+
+/******************************************************/
+/*********************** FONTS ************************/
+/******************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+
+
+
+/******************************************************/
+/*********************** BLOCS ************************/
+/******************************************************/
+@mixin bloc($widthBlock) {
+    border: .0625rem solid gray;
+    padding: .5rem 2rem 1rem 2rem;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+    font-family: "Lato";
+    line-height: 1.5em;
+    width: $widthBlock;
+    h2{
+        font: 300 1.75em/120% "Source Sans Pro";
+    }
+}
+
+.content-blocs{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bloc1{
+    @include bloc(100%);
+}
+
+.bloc2{
+    @include bloc(calc(50% - 1rem));
+}
+
+.bloc3{
+    @include bloc(calc(33.33% - 1rem));
+}
+
+.bloc-login{
+    @include bloc(25rem);
+    font-size: 1em;
+    font-weight: 400;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+
+.line{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: .0625rem solid gray;
+    li {
+        display: inline-block;
+        margin-left: 1rem;
+    }
+    a{
+        color: black;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+    &:last-child{
+        border-bottom: none;
+    }
+    &:hover{
+        background-color: rgb(238, 238, 238);
+    }
+}
+
+
+
+
+/******************************************************/
+/*********************** TABS *************************/
+/******************************************************/
+.nav-tabs{
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    li{
+        margin-right: 1rem;
+        background-color: rgb(231, 231, 231);
+        &.active{
+            background-color: rgb(201, 201, 201);
+        }
+    }
+    a{
+        padding: .75rem;
+        display: inline-block;
+        color: black;
+        text-decoration: none;
+    }
+}
+
+.tab-pane{
+    display: none;
+    &.active{
+        display: block;
+    }
+}
+
+
+
+/******************************************************/
+/********************** MIXINS ************************/
+/******************************************************/
+@mixin btn() {
+    background-color: #3F7690;
+    padding: 1rem;
+    text-decoration: none;
+    font: 300 1.1em/100% "Lato";
+    color: white;
+    display: inline-block;
+}
+
+.btn-add{
+    float: right;
+    .btn-link{
+        @include btn();
+    }
+}
+
+
+
+
+/******************************************************/
+/********************** INPUTS ************************/
+/******************************************************/
+label{
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    &[for=registration_form_agreeTerms]{
+        display: inline-block;
+        margin: 1.5rem 0;
+    }
+    &.hidden{
+        display: none;
+    }
+}
+
+input{
+    &[type=text],
+    &[type=email],
+    &[type=password]{
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        padding: .5rem .7rem;
+        font: 400 .9em/1.5em "Lato";
+    }
+    &[type=checkbox]{
+        display: inline-block;
+        margin-left: 1rem;
+    }
+    &[type=number]{
+        padding: .5rem .7rem;
+    }
+}
+
+select{
+    padding: .5rem;
+}
+
+textarea{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 10rem;
+    margin-bottom: 1rem;
+    padding: .5rem .7rem;
+    font: 400 .9em/1.5em "Lato";
+}
+
+.tox-tinymce{
+    min-height: 350px;
+    margin-bottom: 1.2rem;
+}
+
+.cke{
+    margin-bottom: 1.2rem !important;
+}
+
+button{
+    @include btn();
+    cursor: pointer;
+    border: none;
+    &.margin-top{
+        margin-top: 1.5rem;
+    }
+    &[type=submit]{
+        margin-bottom: .5rem;
+    }
+}
+
+.manage-nav-content{
+    display: flex;
+}
+
+.nav-list{
+    width: 100%;
+}
+
+.pages-list{
+    width: 18rem;
+    border-right: 1px solid gray;
+    margin-right: 1.5rem;
+    .nav-location-list{
+        margin: 0 0 1rem 0;
+    }
+    input{
+        margin: 0 1rem 0 0;
+    }
+    label{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .inline{
+        display: flex;
+        align-items: center;
+        margin-bottom: .5rem;
+    }
+    button{
+        margin-top: 1rem;
+    }
+}

@@ -1,0 +1,14 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Style du site{% endblock %}
+
+{% block body %}
+
+<section class="bloc1">
+    <h2>Style SCSS du site</h2>
+    {{ form_start(form) }}
+        {{ form_row(form.code_front, { label: 'Code source du SCSS' }) }}
+    {{ form_end(form) }}
+</section>
+
+{% endblock %}

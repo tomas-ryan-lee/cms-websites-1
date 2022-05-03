@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Gérer les liens du menu{% endblock %}
+
+{% block body %}
+
+<section class="bloc1">
+    <h2>Gérer les liens du menu</h2>
+    {% for link in links %}
+    <div class="line">
+        <p>{{ link.name }}</p>
+        <ul>
+            <li>
+                <a href=" {{ path('nav_delete', { id: link.id } )}} ">Supprimer</a>
+            </li>
+        </ul>
+    </div>
+    {% else %}
+        <p>Il n'y a pas encore de liens de navigation !</p>
+    {% endfor %}
+</section>
+
+{% endblock %}
